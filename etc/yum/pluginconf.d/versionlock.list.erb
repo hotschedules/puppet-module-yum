@@ -1,0 +1,8 @@
+#
+# Yum package version locks.
+#
+# !!!!! this file is maintained by puppet !!!!!
+#
+<% @versionlocks.keys.sort.each do |name| -%>
+0:<%= name %>-<%= @versionlocks[name] %>*
+<% end -%>
