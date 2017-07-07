@@ -21,7 +21,7 @@
 #     failovermethod  => 'priority',
 #     gpgcheck        => '1',
 #     metadata_expire => '300',
-#     priority        => '1',
+#     priority        => '3',
 #     timeout         => '10',
 #   }
 # - Repository default settings
@@ -49,7 +49,7 @@ class yum (
     failovermethod  => 'priority',
     gpgcheck        => '1',
     metadata_expire => '300',
-    priority        => '1',
+    priority        => '3',
     timeout         => '10',
   },
 
