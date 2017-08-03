@@ -3,6 +3,21 @@
 #
 # !!!!! this file is maintained by puppet !!!!!
 #
-<% @versionlocks.keys.sort.each do |name| -%>
-0:<%= name %>-<%= @versionlocks[name] %>*
+<% def form_versionlock(k,v) -%>
+<%   if @versionlocks[k].is_a?(Hash) -%>
+<%#    New format -%>
+<%     versionlock = '' -%>
+<%     versionlock << '%i:' % v.key?('epoch') ? v['epoch'] : 0 -%>
+<%     versionlock <<  '%s-' % v.key?('name') ? v['name'] : k -%>
+<%     versionlock << v['version'] -%>
+<%     versionlock << '-%s' % v['release'] if v.key?('release') -%>
+<%     versionlock << '.%s' % v['arch'] if v.key?('arch') -%>
+<%   else -%>
+<%#    Legacy format -%>
+<%     versionlock = '0:%s-%s' % [k ,v] -%>
+<%   end -%>
+<%   return versionlock -%>
+<% end -%>
+<% @versionlocks.sort.map do |k,v| -%>
+<%= form_versionlock(k,v) %>
 <% end -%>
