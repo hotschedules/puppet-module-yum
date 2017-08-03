@@ -7,14 +7,14 @@
 <%   if @versionlocks[k].is_a?(Hash) -%>
 <%#    New format -%>
 <%     versionlock = '' -%>
-<%     versionlock << '%i:' % v.key?('epoch') ? v['epoch'] : 0 -%>
-<%     versionlock <<  '%s-' % v.key?('name') ? v['name'] : k -%>
+<%     versionlock << '%i:' % [ v.key?('epoch') ? v['epoch'] : 0 ] -%>
+<%     versionlock <<  '%s-' % [ v.key?('name') ? v['name'] : k ] -%>
 <%     versionlock << v['version'] -%>
-<%     versionlock << '-%s' % v['release'] if v.key?('release') -%>
-<%     versionlock << '.%s' % v['arch'] if v.key?('arch') -%>
+<%     versionlock << '-%s' %  v['release'] if v.key?('release') -%>
+<%     versionlock << '.%s' % [ v.key?('arch') ? v['arch'] : '*' ] -%>
 <%   else -%>
 <%#    Legacy format -%>
-<%     versionlock = '0:%s-%s' % [k ,v] -%>
+<%     versionlock = '0:%s-%s.*' % [k ,v] -%>
 <%   end -%>
 <%   return versionlock -%>
 <% end -%>
