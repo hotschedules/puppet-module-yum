@@ -10,7 +10,10 @@
 <%     versionlock << '%i:' % [ v.key?('epoch') ? v['epoch'] : 0 ] -%>
 <%     versionlock <<  '%s-' % [ v.key?('name') ? v['name'] : k ] -%>
 <%     versionlock << v['version'] -%>
-<%     versionlock << '-%s' %  v['release'] if v.key?('release') -%>
+<%#    Folks keep embedding release strings in the version. -%>
+<%     if not v['version'].include?('-') -%>
+<%       versionlock << '-%s' % [ v.key?('release') ? v['release'] : '*' ] -%>
+<%     end -%>
 <%     versionlock << '.%s' % [ v.key?('arch') ? v['arch'] : '*' ] -%>
 <%   else -%>
 <%#    Legacy format -%>
