@@ -9,17 +9,18 @@
 <%     versionlock = '' -%>
 <%     versionlock << '%i:' % [ v.key?('epoch') ? v['epoch'] : 0 ] -%>
 <%     versionlock <<  '%s-' % [ v.key?('name') ? v['name'] : k ] -%>
-<%     if v['version'].include?('-') -%>
-<%#      Folks keep embedding release strings in the version.  I guess -%>
-<%#      we'll need to support this misspecification, as it is so common -%>
-<%       versionlock << v['version'] -%>
+<%     if v.key?('version-release') -%>
+<%       version,release = v['version-release'].split('-') -%>
 <%     else -%>
-<%       versionlock << '%s-%s' % [ v['version'], v.key?('release') ? v['release'] : '*' ] -%>
+<%#      A version is actually required -- plugin will not allow wildcards -%>
+<%       version = v['version'] -%>
+<%       release = v.key?('release') ? v['release'] : '*' -%>
 <%     end -%>
+<%     versionlock << '%s-%s' % [ version, release ] -%>
 <%     versionlock << '.%s' % [ v.key?('arch') ? v['arch'] : '*' ] -%>
 <%   else -%>
 <%#    Legacy format -%>
-<%     versionlock = '0:%s-%s.*' % [k ,v] -%>
+<%     versionlock = '0:%s-%s*' % [k ,v] -%>
 <%   end -%>
 <%   return versionlock -%>
 <% end -%>
