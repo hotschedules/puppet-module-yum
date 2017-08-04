@@ -20,7 +20,7 @@
 <%     versionlock << '.%s' % [ v.key?('arch') ? v['arch'] : '*' ] -%>
 <%   else -%>
 <%#    Legacy format -%>
-<%     versionlock = '0:%s-%s.*' % [k ,v] -%>
+<%     versionlock = '0:%s-%s*' % [k ,v] -%>
 <%   end -%>
 <%   return versionlock -%>
 <% end -%>
