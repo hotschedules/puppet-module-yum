@@ -26,43 +26,43 @@ class yum::config::redhat inherits yum {
       'amzn-main'               => {
         descr       => 'amzn-main-Base',
         gpgkey      => 'file:///etc/pki/rpm-gpg/RPM-GPG-KEY-amazon-ga',
-        mirrorlist  => "http://repo.${::ec2_region}.amazonaws.com/$releasever/main/mirror.list",
+        mirrorlist  => "http://repo.${::ec2_region}.amazonaws.com/\$releasever/main/mirror.list",
       },
       'amzn-main-debuginfo'     => {
         descr       => 'amzn-main-debuginfo',
         enabled     => '0',
         gpgkey      => 'file:///etc/pki/rpm-gpg/RPM-GPG-KEY-amazon-ga',
-        mirrorlist  => "http://repo.${::ec2_region}.amazonaws.com/$releasever/main/debuginfo/mirror.list",
+        mirrorlist  => "http://repo.${::ec2_region}.amazonaws.com/\$releasever/main/debuginfo/mirror.list",
       },
       'amzn-nosrc'              => {
         descr       => 'amzn-nosrc-Base',
         enabled     => '0',
         gpgcheck    => '0',
         gpgkey      => 'file:///etc/pki/rpm-gpg/RPM-GPG-KEY-amazon-ga',
-        mirrorlist  => "http://repo.${::ec2_region}.amazonaws.com/$releasever/nosrc/mirror.list",
+        mirrorlist  => "http://repo.${::ec2_region}.amazonaws.com/\$releasever/nosrc/mirror.list",
       },
       'amzn-preview'            => {
         descr       => 'amzn-preview-Base',
         enabled     => '0',
         gpgkey      => 'file:///etc/pki/rpm-gpg/RPM-GPG-KEY-amazon-ga',
-        mirrorlist  => "http://repo.${::ec2_region}.amazonaws.com/$releasever/preview/mirror.list",
+        mirrorlist  => "http://repo.${::ec2_region}.amazonaws.com/\$releasever/preview/mirror.list",
       },
       'amzn-preview-debuginfo'  => {
         descr       => 'amzn-preview-debuginfo',
         enabled     => '0',
         gpgkey      => 'file:///etc/pki/rpm-gpg/RPM-GPG-KEY-amazon-ga',
-        mirrorlist  => "http://repo.${::ec2_region}.amazonaws.com/$releasever/preview/debuginfo/mirror.list",
+        mirrorlist  => "http://repo.${::ec2_region}.amazonaws.com/\$releasever/preview/debuginfo/mirror.list",
       },
       'amzn-updates'            => {
         descr       => 'amzn-updates-Base',
         gpgkey      => 'file:///etc/pki/rpm-gpg/RPM-GPG-KEY-amazon-ga',
-        mirrorlist  => "http://repo.${::ec2_region}.amazonaws.com/$releasever/updates/mirror.list",
+        mirrorlist  => "http://repo.${::ec2_region}.amazonaws.com/\$releasever/updates/mirror.list",
       },
       'amzn-updates-debuginfo'  => {
         descr       => 'amzn-updates-debuginfo',
         enabled     => '0',
         gpgkey      => 'file:///etc/pki/rpm-gpg/RPM-GPG-KEY-amazon-ga',
-        mirrorlist  => "http://repo.${::ec2_region}.amazonaws.com/$releasever/updates/debuginfo/mirror.list",
+        mirrorlist  => "http://repo.${::ec2_region}.amazonaws.com/\$releasever/updates/debuginfo/mirror.list",
       },
 # -------------------------------------------------------------------------- }}}
 
