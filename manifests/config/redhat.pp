@@ -30,6 +30,7 @@ class yum::config::redhat inherits yum {
       },
       'amzn-main-debuginfo'     => {
         descr       => 'amzn-main-debuginfo',
+        enabled     => '0',
         gpgkey      => 'file:///etc/pki/rpm-gpg/RPM-GPG-KEY-amazon-ga',
         mirrorlist  => "http://repo.${::ec2_region}.amazonaws.com/$releasever/main/debuginfo/mirror.list",
       },
@@ -54,12 +55,12 @@ class yum::config::redhat inherits yum {
       },
       'amzn-updates'            => {
         descr       => 'amzn-updates-Base',
-        enabled     => '1',
         gpgkey      => 'file:///etc/pki/rpm-gpg/RPM-GPG-KEY-amazon-ga',
         mirrorlist  => "http://repo.${::ec2_region}.amazonaws.com/$releasever/updates/mirror.list",
       },
       'amzn-updates-debuginfo'  => {
         descr       => 'amzn-updates-debuginfo',
+        enabled     => '0',
         gpgkey      => 'file:///etc/pki/rpm-gpg/RPM-GPG-KEY-amazon-ga',
         mirrorlist  => "http://repo.${::ec2_region}.amazonaws.com/$releasever/updates/debuginfo/mirror.list",
       },
