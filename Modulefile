@@ -1,4 +1,4 @@
-# vim: filetype=ruby tabstop=2 expandtab shiftwidth=2 softtabstop=2 foldmethod=marker
+# vim: filetype=ruby tabstop=2 expandtab shiftwidth=2 softtabstop=2
 
 name          'clabs-yum'
 author        'Convection Labs'

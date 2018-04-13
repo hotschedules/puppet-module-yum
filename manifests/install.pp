@@ -1,4 +1,4 @@
-# vim: tabstop=2 expandtab shiftwidth=2 softtabstop=2 foldmethod=marker
+# vim: tabstop=2 expandtab shiftwidth=2 softtabstop=2
 #
 # == Class: yum::install
 # ---
@@ -12,14 +12,44 @@ class yum::install inherits yum {
   # Base packages
   clabs::install { $packages: }
 
-  # Most specific installation
-  if defined("::${name}::${::operatingsystem}") {
-    contain "${name}::${::operatingsystem}"
+  clabs::template { '/etc/yum.conf': }
 
-  # Least specific installation
-  } elsif defined("${name}::${::osfamily}") {
-    contain "${name}::${::osfamily}"
+  if $cob_enabled == true {
+
+    $cob_installfile  = "/tmp/yum-plugin-cob-${cob_version}.amzn1.noarch.rpm"
+    validate_absolute_path  ( $cob_installfile )
+    clabs::config {
+      [ $cob_installfile ]:
+    }
+    package { 'yum-plugin-cob':
+      provider => "rpm",
+      ensure   => installed,
+      require  => Clabs::Config[$cob_installfile],
+      source   => $cob_installfile;
+    }
+    package { 'yum-plugin-s3-iam':
+      provider => "rpm",
+      ensure   => absent,
+    }
+  } elsif $s3iam_enabled == true {
+
+    validate_absolute_path  ( $s3iam_installfile )
+
+    clabs::config {
+      [ $s3iam_installfile ]:
+    }
+    package { 'yum-plugin-s3-iam':
+      provider => "rpm",
+      ensure   => installed,
+      require  => Clabs::Config[$s3iam_installfile],
+      source   => $s3iam_installfile;
+    }
+    package { 'yum-plugin-cob':
+      provider => "rpm",
+      ensure   => absent,
+    }
   }
-
+  if $versionlocks {
+    clabs::install { 'yum-plugin-versionlock': }
+  }
 }
-

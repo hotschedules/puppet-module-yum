@@ -1,4 +1,4 @@
-# vim: tabstop=2 expandtab shiftwidth=2 softtabstop=2 foldmethod=marker
+# vim: tabstop=2 expandtab shiftwidth=2 softtabstop=2
 #
 # == Class: yum
 # ---
@@ -12,23 +12,16 @@
 #
 class yum::config inherits yum {
 
-  # Most specific configuration
-  if defined("::${name}::${::operatingsystem}") {
-    contain "${name}::${::operatingsystem}"
-    $baserepos = getvar("::${name}::${::operatingsystem}::baserepos")
-
-  # Least specific configuration
-  } else {
-    contain "${name}::${::osfamily}"
-    $baserepos = getvar("::${name}::${::osfamily}::baserepos")
-  }
-
-  # Merge base repos with any Hiera repo lists
-  $allrepos = clabs_deep_merge($baserepos, $repos)
+  # Merge all `yum::repos` defined at various points in hiera
+  $allrepos = clabs_deep_merge({}, $repos)
 
   # Create repos
   if !empty($allrepos) {
     create_resources('yumrepo', $allrepos, $repodefaults)
+  }
+
+  if $versionlocks {
+    clabs::template { '/etc/yum/pluginconf.d/versionlock.list': }
   }
 
 }
