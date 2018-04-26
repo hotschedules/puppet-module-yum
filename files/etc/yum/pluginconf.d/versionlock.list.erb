@@ -20,7 +20,18 @@
 <%     versionlock << '.%s' % [ v.key?('arch') ? v['arch'] : '*' ] -%>
 <%   else -%>
 <%#    Legacy format -%>
-<%     versionlock = '0:%s-%s*' % [k ,v] -%>
+<%     if v.include? ":" -%>
+<%#      Support 'Epoch:' in version, default to '0:' if not provided -%>
+<%       e, v = v.split(':', 2) -%>
+<%     else -%>
+<%       e = 0 -%>
+<%     end -%>
+<%     if v.end_with? "." -%>
+<%       v += '*' -%>
+<%     else -%>
+<%       v += '.*' -%>
+<%     end -%>
+<%     versionlock = '%s:%s-%s' % [e, k ,v] -%>
 <%   end -%>
 <%   return versionlock -%>
 <% end -%>
